@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# 🌱 BlueCotton
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> **챌린지 기반 커뮤니티 & 습관 형성 플랫폼**
 
-## Available Scripts
+BlueCotton(블루코튼)은  
+사용자가 챌린지에 참여하고, **하루 1회 게시글을 작성하며**  
+성장 단계를 쌓아가는 **웹 서비스**입니다.
 
-In the project directory, you can run:
+## 📌 프로젝트 개요
 
-### `yarn start`
+- **프로젝트명**: BlueCotton
+- **개발 기간**: 2024.08 ~ 2024.11
+- **형태**: 팀 프로젝트 (Frontend / Backend 분리)
+- **담당 역할**: 게시판(오늘의 솜) 프론트엔드 개발
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠 기술 스택
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React
+- React Router
+- Styled-components
+- React Query
+- Redux
+- Toast UI Editor
 
-### `yarn test`
+## ✨ 주요 기능
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 게시글 CRUD (작성 / 수정 / 삭제 / 조회)
+- 하루 1회 게시글 작성 제한
+- 이미지 업로드 (Toast UI Editor)
+- 좋아요 / 댓글 / 대댓글
 
-### `yarn build`
+## 🧯 트러블슈팅
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. 게시글 이미지 업로드 후 상세 페이지에서 이미지가 보이지 않던 문제
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **문제**  
+  Toast UI Editor로 업로드한 이미지는 서버에 저장되었으나,  
+  게시글 상세 조회 시 이미지가 렌더링되지 않는 문제가 발생함
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **원인**  
+  에디터 업로드 시점과 게시글 저장 시점이 분리되어 있어  
+  이미지 정보와 게시글 ID 간 매핑이 되지 않았음
 
-### `yarn eject`
+- **해결**  
+  게시글 저장 완료 후 서버에서 게시글 ID를 기준으로  
+  이미지 정보를 후처리하여 연결하도록 API 흐름을 수정함
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **배운 점**  
+  파일 업로드는 단순 UI 문제가 아니라  
+  **DB 트랜잭션 흐름과 함께 설계되어야 한다는 점**을 이해함
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. 하루 1회 게시글 작성 제한 UI 처리 문제
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **문제**  
+  서버에서는 하루 1회 제한이 정상 동작했으나  
+  프론트에서는 제한 여부를 사전에 알 수 없었음
 
-## Learn More
+- **원인**  
+  제한 로직이 서버에만 존재하여  
+  프론트에서는 실패 응답 이후에만 상태를 알 수 있었음
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **해결**  
+  게시글 작성 페이지 진입 시  
+  작성 가능 여부를 조회하는 API를 추가하여  
+  UI 레벨에서 사전 제어가 가능하도록 개선함
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **배운 점**  
+  비즈니스 로직은 서버 중심으로 두되,  
+  **UX 개선을 위한 보조 API 설계의 중요성**을 배움
